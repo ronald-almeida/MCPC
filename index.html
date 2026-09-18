@@ -37,7 +37,7 @@ body{display:flex;justify-content:center}
 .payment-choice{display:flex;align-items:center;gap:14px;color:var(--purple);font-weight:700;font-size:16px;margin:12px 4px 24px}.radio{width:20px;height:20px;border:2px solid var(--purple);border-radius:50%;position:relative}.radio:after{content:"";position:absolute;inset:4px;background:var(--purple);border-radius:50%}.pixicon{width:20px;height:20px;display:block;flex:none}
 .info{border:1px solid #e2e2e2;border-radius:8px;padding:18px 18px 10px;color:#777;font-size:13px;line-height:1.5}.info-title{color:var(--purple);margin-bottom:12px;display:flex;align-items:center;gap:6px}.info-title svg{width:15px;height:15px;display:block;flex:none}.info ul{padding-left:18px;margin:0}.pay{margin-top:24px;border-radius:8px;width:80%;height:40px}.back{text-align:center;color:var(--purple);margin-top:12px;cursor:pointer}
 .footer{text-align:center;color:#aaa;font-size:10px;padding:9px 22px 12px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal.open{display:flex}.modal-card{width:min(100%,420px);background:#fff;color:#111;border-radius:12px;padding:22px;position:relative}.close{position:absolute;right:12px;top:8px;border:0;background:transparent;font-size:27px;color:#777;cursor:pointer}.qr{display:flex;justify-content:center;margin:10px 0}.qr img{width:230px;height:230px}.pix-code{width:100%;height:82px;border:1px solid #ddd;border-radius:6px;padding:9px;resize:none}.copy{width:100%;height:43px;border:0;border-radius:6px;background:#a918ff;color:#fff;font-weight:700;margin-top:10px;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal.open{display:flex}.modal-card{width:min(100%,440px);max-height:94vh;overflow:auto;background:#fff;color:#111;border-radius:20px;padding:24px 22px 22px;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.45);animation:modalIn .2s ease-out}.close{position:absolute;right:14px;top:12px;width:34px;height:34px;border:0;border-radius:50%;background:#f3f3f3;font-size:24px;line-height:1;color:#666;cursor:pointer}.pix-modal-head{text-align:center;padding:4px 34px 0}.pix-modal-icon{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#b014ff,#8d0de8);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}.pix-modal-icon svg{width:24px;height:24px}.pix-modal-head h2{margin:0;font-size:22px;line-height:1.2}.pix-modal-head p{margin:7px 0 0;color:#777;font-size:13px;line-height:1.45}.pix-summary{margin:17px 0 14px;padding:12px 14px;border:1px solid #eee;border-radius:12px;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:12px}.pix-summary span{font-size:12px;color:#777}.pix-summary strong{font-size:18px;color:#111;white-space:nowrap}.qr-wrap{border:1px solid #eee;border-radius:16px;padding:14px;background:#fff}.qr{display:flex;justify-content:center;margin:0}.qr img{width:230px;height:230px;max-width:100%;display:block}.scan-note{text-align:center;font-size:12px;color:#777;margin:9px 0 0}.copy-label{display:block;font-size:12px;color:#666;margin:14px 0 7px}.pix-code{width:100%;height:78px;border:1px solid #ddd;border-radius:10px;padding:10px 12px;resize:none;background:#fafafa;font:12px/1.4 var(--font-inter,'Inter'),Arial,sans-serif;color:#444;outline:none}.copy{width:100%;height:48px;border:0;border-radius:10px;background:linear-gradient(90deg,#b014ff,#9410e8);color:#fff;font-weight:700;font-size:15px;margin-top:10px;cursor:pointer;box-shadow:0 8px 22px rgba(169,24,255,.22)}.copy:hover{filter:brightness(.98)}.pix-help{display:flex;align-items:flex-start;gap:8px;margin-top:12px;padding:10px 12px;border-radius:10px;background:#f8f4fb;color:#6f5b78;font-size:11px;line-height:1.45}.pix-help svg{width:15px;height:15px;flex:none;margin-top:1px;color:#a918ff}@keyframes modalIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 </style>
 </head>
 <body>
@@ -82,7 +82,30 @@ body{display:flex;justify-content:center}
 <div class="footer">Este site utiliza recursos de segurança para proteger sua compra.</div>
 </main>
 
-<div id="pixModal" class="modal" aria-hidden="true"><div class="modal-card"><button id="closeModal" class="close">×</button><h2>Pagamento via Pix</h2><p>Escaneie o QR Code ou copie o código abaixo.</p><div id="qr" class="qr"></div><textarea id="pixCode" class="pix-code" readonly></textarea><button id="copyPix" class="copy">Copiar código Pix</button></div></div>
+<div id="pixModal" class="modal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pixTitle">
+    <button id="closeModal" class="close" type="button" aria-label="Fechar">×</button>
+    <div class="pix-modal-head">
+      <div class="pix-modal-icon">
+        <svg viewBox="0 0 448 512" aria-hidden="true"><path fill="currentColor" d="M144 64c8.8 0 16 7.2 16 16l0 96c0 8.8-7.2 16-16 16l-96 0c-8.8 0-16-7.2-16-16l0-96c0-8.8 7.2-16 16-16l96 0zM48 32C21.5 32 0 53.5 0 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48L48 32zM160 336l0 96c0 8.8-7.2 16-16 16l-96 0c-8.8 0-16-7.2-16-16l0-96c0-8.8 7.2-16 16-16l96 0c8.8 0 16 7.2 16 16zM48 288c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0zM304 64l96 0c8.8 0 16 7.2 16 16l0 96c0 8.8-7.2 16-16 16l-96 0c-8.8 0-16-7.2-16-16l0-96c0-8.8 7.2-16 16-16zM256 80l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-26.5-21.5-48-48-48l-96 0c-26.5 0-48 21.5-48 48z"></path></svg>
+      </div>
+      <h2 id="pixTitle">Pix gerado com sucesso</h2>
+      <p>Escaneie o QR Code pelo app do seu banco ou copie o código Pix abaixo.</p>
+    </div>
+    <div class="pix-summary"><span>Valor da compra</span><strong>R$ 397,00</strong></div>
+    <div class="qr-wrap">
+      <div id="qr" class="qr"></div>
+      <div class="scan-note">Aponte a câmera do app do seu banco para o QR Code</div>
+    </div>
+    <label class="copy-label" for="pixCode">Pix copia e cola</label>
+    <textarea id="pixCode" class="pix-code" readonly></textarea>
+    <button id="copyPix" class="copy" type="button">Copiar código Pix</button>
+    <div class="pix-help">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><path fill="currentColor" d="M256 512a256 256 0 1 1 0-512 256 256 0 1 1 0 512zm0-480a224 224 0 1 0 0 448 224 224 0 1 0 0-448zm0 352a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm0-256c13.5 0 24.3 11.4 23.5 24.9l-7.6 136c-.5 8.5-7.5 15.1-16 15.1s-15.5-6.6-16-15.1l-7.6-136c-.8-13.5 10-24.9 23.5-24.9z"></path></svg>
+      <span>Depois de pagar, aguarde a confirmação do Pix. Não é necessário gerar uma nova cobrança.</span>
+    </div>
+  </div>
+</div>
 <script>
 const digits=v=>String(v||'').replace(/\D/g,'');
 const nameEl=document.getElementById('name'),emailEl=document.getElementById('email'),phoneEl=document.getElementById('phone'),taxEl=document.getElementById('taxId');
@@ -93,7 +116,7 @@ document.getElementById('back').addEventListener('click',()=>{paymentView.style.
 const modal=document.getElementById('pixModal'),qr=document.getElementById('qr'),pixCode=document.getElementById('pixCode'),payButton=document.getElementById('payButton');
 payButton.addEventListener('click',async()=>{const original=payButton.textContent;try{payButton.disabled=true;payButton.textContent='Gerando Pix...';const r=await fetch('/api/create-pix',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(customer())});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Não foi possível gerar o Pix.');if(!data.copypaste||!data.qrCode)throw new Error('Dados do Pix não retornados.');pixCode.value=data.copypaste;qr.innerHTML='<img src="'+data.qrCode+'" alt="QR Code Pix">';modal.classList.add('open');modal.setAttribute('aria-hidden','false')}catch(e){alert(e.message||'Erro ao gerar Pix.')}finally{payButton.disabled=false;payButton.textContent=original}});
 document.getElementById('closeModal').onclick=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')};
-document.getElementById('copyPix').onclick=async()=>{try{await navigator.clipboard.writeText(pixCode.value)}catch{pixCode.select();document.execCommand('copy')}};
+document.getElementById('copyPix').onclick=async()=>{const b=document.getElementById('copyPix');const original=b.textContent;try{await navigator.clipboard.writeText(pixCode.value)}catch{pixCode.select();document.execCommand('copy')}b.textContent='Código Pix copiado ✓';setTimeout(()=>b.textContent=original,1800)};
 </script>
 </body>
 </html>
