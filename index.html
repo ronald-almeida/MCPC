@@ -13,11 +13,11 @@ body{display:flex;justify-content:center}
 .page{width:min(100%,600px);min-height:100vh;background:#000}
 .top{padding:23px 24px 28px}
 .brand{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:18px}
-.brand-logo{width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid #e73b4a;display:flex;align-items:center;justify-content:center;color:#e73b4a;font-size:7px;font-weight:800}
+.brand-logo{width:34px;height:34px;border-radius:50%;object-fit:cover;display:block;background:#fff}
 .secure-bar{width:78%;margin:16px auto 22px;background:#fff;color:#333;border-radius:9px;height:39px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px}
 .shield{width:17px;height:17px;display:inline-block}
 .product{display:flex;justify-content:center;align-items:center;gap:12px;margin:6px 0 38px}
-.product-cover{width:68px;height:68px;border-radius:8px;background:#fff url('./product-logo.png') center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:#d22;font-size:10px;font-weight:900;text-align:center}
+.product-cover{width:68px;height:68px;border-radius:8px;object-fit:cover;display:block;background:#fff}
 .product-title{font-weight:700;font-size:18px}
 .detail-title{font-size:17px;margin-bottom:17px;display:flex;align-items:center;justify-content:space-between}
 .line{height:2px;background:var(--line);margin-bottom:9px}
@@ -43,9 +43,9 @@ body{display:flex;justify-content:center}
 <body>
 <main class="page">
 <section class="top">
-  <div class="brand"><div class="brand-logo">Help</div> Help Engenharia</div>
+  <div class="brand"><img class="brand-logo" src="./help-engenharia.png" alt="Help Engenharia"> Help Engenharia</div>
   <div class="secure-bar"><svg class="shield" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg> COMPRA SEGURA</div>
-  <div class="product"><div class="product-cover">COMBO<br>BASE<br>360°</div><div class="product-title">Combo Base 360°</div></div>
+  <div class="product"><img class="product-cover" src="./combo-base-360.png" alt="Combo Base 360°"><div class="product-title">Combo Base 360°</div></div>
   <div class="detail-title"><span>Detalhe da Compra</span><span>⌃</span></div>
   <div class="line"></div>
   <div class="detail-row"><span>🛒&nbsp; Produto</span><strong>R$ 397,00</strong></div>
