@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Combo Base 360° | Checkout</title>
+<style>
+:root{--purple:#a918ff;--purple2:#cf80ef;--line:#c100ff;--font-inter:'Inter'}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:var(--font-inter,'Inter'),var(--font-inter,'Inter'),Arial,Helvetica,sans-serif;background:#000;color:#fff}
+body{display:flex;justify-content:center}
+.page{width:min(100%,600px);min-height:100vh;background:#000}
+.top{padding:23px 24px 28px}
+.brand{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:18px}
+.brand-logo{width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid #e73b4a;display:flex;align-items:center;justify-content:center;color:#e73b4a;font-size:7px;font-weight:800}
+.secure-bar{width:78%;margin:16px auto 22px;background:#fff;color:#333;border-radius:9px;height:39px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px}
+.shield{width:17px;height:17px;display:inline-block}
+.product{display:flex;justify-content:center;align-items:center;gap:12px;margin:6px 0 38px}
+.product-cover{width:68px;height:68px;border-radius:8px;background:#fff url('./product-logo.png') center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:#d22;font-size:10px;font-weight:900;text-align:center}
+.product-title{font-weight:700;font-size:18px}
+.detail-title{font-size:17px;margin-bottom:17px;display:flex;align-items:center;justify-content:space-between}
+.line{height:2px;background:var(--line);margin-bottom:9px}
+.detail-row{display:flex;justify-content:space-between;align-items:center;font-size:16px;padding:1px 0 10px;border-bottom:2px solid var(--line)}
+.total-row{display:flex;justify-content:space-between;font-size:17px;font-weight:700;padding-top:9px}
+.charge{font-size:14px;line-height:1.55;margin-top:11px}
+.panel{background:#fff;color:#111;border-radius:15px 15px 0 0;padding:18px 24px 40px;min-height:500px}
+.steps{display:flex;align-items:center;justify-content:space-between;color:var(--purple);font-size:12px;margin:4px 8px 18px;position:relative}
+.steps:before{content:"";position:absolute;left:30px;right:30px;top:4px;border-top:1px dashed var(--purple)}
+.step{position:relative;background:#fff;padding:0 0;z-index:1}.step.right{color:#aaa}
+.dot{width:10px;height:10px;border-radius:50%;border:2px solid currentColor;background:#fff;margin:0 auto 4px}.step:first-child .dot{background:var(--purple)}
+.country{width:180px;margin:0 auto 20px;background:#f0f0f0;border-radius:7px;height:31px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px}
+.flag{width:22px;height:15px;background:#139447;position:relative;overflow:hidden}.flag:before{content:"";position:absolute;width:13px;height:13px;left:4px;top:1px;background:#ffdf00;transform:rotate(45deg) scale(.72)}.flag:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#002776;left:7px;top:4px}
+.field-wrap{margin:0 0 22px}.field{width:100%;border:0;border-bottom:1px solid #e6e6e6;height:44px;font:16px var(--font-inter,'Inter'),Arial,sans-serif;outline:none;color:#333}.field::placeholder{color:#808080}.phone-row{display:flex;align-items:center;border-bottom:1px solid #e6e6e6}.phone-prefix{display:flex;align-items:center;gap:8px;padding:0 8px 0 6px;color:#666}.phone-row input{border:0;flex:1;height:44px;font:16px var(--font-inter,'Inter'),Arial,sans-serif;outline:none}
+.error{background:#fb2016;color:#fff;font-size:11px;text-align:center;border-radius:8px 8px 0 0;padding:4px 8px;display:none;width:300px;margin:18px auto 0}.next,.pay{width:300px;height:41px;margin:0 auto;display:block;border:0;border-radius:0 0 3px 3px;background:var(--purple2);color:#fff;font-size:16px;font-weight:700;cursor:pointer}.next.ready,.pay{background:linear-gradient(90deg,#b014ff,#9c16eb)}
+.payment-view{display:none}
+.payment-choice{display:flex;align-items:center;gap:14px;color:var(--purple);font-weight:700;font-size:16px;margin:12px 4px 24px}.radio{width:20px;height:20px;border:2px solid var(--purple);border-radius:50%;position:relative}.radio:after{content:"";position:absolute;inset:4px;background:var(--purple);border-radius:50%}.pixicon{font-size:19px}
+.info{border:1px solid #e2e2e2;border-radius:8px;padding:18px 18px 10px;color:#777;font-size:13px;line-height:1.5}.info-title{color:var(--purple);margin-bottom:12px}.info ul{padding-left:18px;margin:0}.pay{margin-top:24px;border-radius:8px;width:80%;height:40px}.back{text-align:center;color:var(--purple);margin-top:12px;cursor:pointer}
+.footer{text-align:center;color:#aaa;font-size:10px;padding:9px 22px 12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal.open{display:flex}.modal-card{width:min(100%,420px);background:#fff;color:#111;border-radius:12px;padding:22px;position:relative}.close{position:absolute;right:12px;top:8px;border:0;background:transparent;font-size:27px;color:#777;cursor:pointer}.qr{display:flex;justify-content:center;margin:10px 0}.qr img{width:230px;height:230px}.pix-code{width:100%;height:82px;border:1px solid #ddd;border-radius:6px;padding:9px;resize:none}.copy{width:100%;height:43px;border:0;border-radius:6px;background:#a918ff;color:#fff;font-weight:700;margin-top:10px;cursor:pointer}
+</style>
+</head>
+<body>
+<main class="page">
+<section class="top">
+  <div class="brand"><div class="brand-logo">Help</div> Help Engenharia</div>
+  <div class="secure-bar"><svg class="shield" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg> COMPRA SEGURA</div>
+  <div class="product"><div class="product-cover">COMBO<br>BASE<br>360°</div><div class="product-title">Combo Base 360°</div></div>
+  <div class="detail-title"><span>Detalhe da Compra</span><span>⌃</span></div>
+  <div class="line"></div>
+  <div class="detail-row"><span>🛒&nbsp; Produto</span><strong>R$ 397,00</strong></div>
+  <div class="total-row"><span>TOTAL</span><span>R$ 397,00</span></div>
+  <div class="charge">Pagamento único via Pix</div>
+</section>
+
+<section class="panel">
+  <div class="steps"><div class="step"><div class="dot"></div>Contato</div><div class="step right"><div class="dot"></div>Pagamento</div></div>
+  <div id="contactView">
+    <div class="country"><span class="flag"></span> Alterar País <span>⌄</span></div>
+    <div class="field-wrap"><input id="name" class="field" placeholder="Nome e sobrenome *" autocomplete="name"></div>
+    <div class="field-wrap"><input id="email" class="field" placeholder="E-mail *" type="email" autocomplete="email"></div>
+    <div class="field-wrap phone-row"><span class="phone-prefix"><span class="flag"></span> ▾</span><input id="phone" placeholder="Celular *" type="tel" autocomplete="tel"></div>
+    <div class="field-wrap"><input id="taxId" class="field" placeholder="CPF *" inputmode="numeric"></div>
+    <div id="error" class="error">*Existem campos inválidos ou não preenchidos</div>
+    <button id="nextButton" class="next" type="button">Próximo</button>
+  </div>
+
+  <div id="paymentView" class="payment-view">
+    <div class="payment-choice"><span class="radio"></span><span class="pixicon">⌘</span><span>PIX</span></div>
+    <div class="info">
+      <div class="info-title">ⓘ ATENÇÃO A ESTES DETALHES:</div>
+      <ul>
+        <li>Somente à vista;</li>
+        <li>O pagamento será liberado após a confirmação da cobrança;</li>
+        <li>Após gerar o Pix, finalize o pagamento no aplicativo do seu banco.</li>
+      </ul>
+    </div>
+    <button id="payButton" class="pay" type="button">Pagar Agora</button>
+    <div id="back" class="back">Voltar</div>
+  </div>
+</section>
+<div class="footer">Este site utiliza recursos de segurança para proteger sua compra.</div>
+</main>
+
+<div id="pixModal" class="modal" aria-hidden="true"><div class="modal-card"><button id="closeModal" class="close">×</button><h2>Pagamento via Pix</h2><p>Escaneie o QR Code ou copie o código abaixo.</p><div id="qr" class="qr"></div><textarea id="pixCode" class="pix-code" readonly></textarea><button id="copyPix" class="copy">Copiar código Pix</button></div></div>
+<script>
+const digits=v=>String(v||'').replace(/\D/g,'');
+const nameEl=document.getElementById('name'),emailEl=document.getElementById('email'),phoneEl=document.getElementById('phone'),taxEl=document.getElementById('taxId');
+const errorEl=document.getElementById('error'),contactView=document.getElementById('contactView'),paymentView=document.getElementById('paymentView');
+function customer(){const name=nameEl.value.trim(),email=emailEl.value.trim(),phone=digits(phoneEl.value),taxId=digits(taxEl.value);if(!name||!email||!phone||!taxId)throw new Error('Preencha todos os campos.');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new Error('E-mail inválido.');if(taxId.length!==11&&taxId.length!==14)throw new Error('CPF/CNPJ inválido.');if(phone.length<10||phone.length>11)throw new Error('Celular inválido.');return{name,email,phone,taxId}}
+document.getElementById('nextButton').addEventListener('click',()=>{try{customer();errorEl.style.display='none';contactView.style.display='none';paymentView.style.display='block';document.querySelector('.step.right').style.color='var(--purple)'}catch(e){errorEl.textContent='*'+e.message;errorEl.style.display='block'}});
+document.getElementById('back').addEventListener('click',()=>{paymentView.style.display='none';contactView.style.display='block'});
+const modal=document.getElementById('pixModal'),qr=document.getElementById('qr'),pixCode=document.getElementById('pixCode'),payButton=document.getElementById('payButton');
+payButton.addEventListener('click',async()=>{const original=payButton.textContent;try{payButton.disabled=true;payButton.textContent='Gerando Pix...';const r=await fetch('/api/create-pix',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(customer())});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Não foi possível gerar o Pix.');if(!data.copypaste||!data.qrCode)throw new Error('Dados do Pix não retornados.');pixCode.value=data.copypaste;qr.innerHTML='<img src="'+data.qrCode+'" alt="QR Code Pix">';modal.classList.add('open');modal.setAttribute('aria-hidden','false')}catch(e){alert(e.message||'Erro ao gerar Pix.')}finally{payButton.disabled=false;payButton.textContent=original}});
+document.getElementById('closeModal').onclick=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')};
+document.getElementById('copyPix').onclick=async()=>{try{await navigator.clipboard.writeText(pixCode.value)}catch{pixCode.select();document.execCommand('copy')}};
+</script>
+</body>
+</html>
